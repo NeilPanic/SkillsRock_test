@@ -1,16 +1,28 @@
 # Todo-app
 
-Простейший REST-сервис. Реализован CRUD для задач, валидация статуса.
+Реализован CRUD для задач, валидация статуса. Простой REST сервис.
+| HTTP-метод | Путь                | Описание                               |
+|------------|--------------------|----------------------------------------|
+| `POST`     | `/tasks`           | создать задачу                         |
+| `GET`      | `/tasks`           | список \*фильтр `status`, пагинация    |
+| `PUT`      | `/tasks/{id}`      | частичное обновление                   |
+| `DELETE`   | `/tasks/{id}`      | удалить                                |
 
-## 🔑 Переменные окружения
-
-Создайте файл `.env` (или экспортируйте в shell):
-
-# DATABASE_DSN**обязательна** – файл env лежит в корне, можно прописать в переменные окружения.
-DATABASE_DSN=postgres://auth_user:auth_password@localhost:5433/auth_db?sslmode=disable
-
-# HTTP-порт
+\* `status ∈ {new | in_progress | done}`
+## 🔑 Запуск. Переменные окружения
+# .env
+DATABASE_DSN=postgres://auth_user:auth_password@localhost:5432/auth_db?sslmode=disable
 PORT=8080
+
+## 1 · PostgreSQL
+
+```bash
+# ➊ создать пользователя + базу (один раз)
+sudo -u postgres psql <<'SQL'
+CREATE ROLE auth_user WITH LOGIN SUPERUSER PASSWORD 'auth_password';
+CREATE DATABASE auth_db OWNER auth_user;
+SQL
+```
 
 # параметры для миграций
 PG_DATABASE_NAME=auth_db
@@ -26,11 +38,12 @@ bash
 # 1. установить deps (goose + golangci-lint)
 make install-deps           
              
-# 3. запустить API
-make run-local              
-# либо вручную:
-#   set -o allexport; source .env; set +o allexport
-#   go run ./cmd/api
+# 2. запустить API          
+загрузить переменные окружения
+set -o allexport; source .env; set +o allexport
+
+старт сервера
+go run ./cmd/api
 
 📚 Основные Make-цели
 make lint	golangci-lint на всём дереве
