@@ -8,7 +8,7 @@
 | `PUT`      | `/tasks/{id}`      | частичное обновление                   |
 | `DELETE`   | `/tasks/{id}`      | удалить                                |
 
-\* `status ∈ {new | in_progress | done}`
+\* `status -> {new | in_progress | done}`
 ## 🔑 Запуск. Переменные окружения
 # .env
 DATABASE_DSN=postgres://auth_user:auth_password@localhost:5432/auth_db?sslmode=disable
