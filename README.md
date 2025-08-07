@@ -4,7 +4,7 @@
 | HTTP-метод | Путь                | Описание                               |
 |------------|--------------------|----------------------------------------|
 | `POST`     | `/tasks`           | создать задачу                         |
-| `GET`      | `/tasks`           | список \*фильтр `status`, пагинация    |
+| `GET`      | `/tasks`           | список \*фильтр `status`               |
 | `PUT`      | `/tasks/{id}`      | частичное обновление                   |
 | `DELETE`   | `/tasks/{id}`      | удалить                                |
 
@@ -17,7 +17,7 @@ PORT=8080
 ## 1 · PostgreSQL
 
 ```bash
-# ➊ создать пользователя + базу (один раз)
+# создать пользователя + базу (один раз)
 sudo -u postgres psql <<'SQL'
 CREATE ROLE auth_user WITH LOGIN SUPERUSER PASSWORD 'auth_password';
 CREATE DATABASE auth_db OWNER auth_user;
