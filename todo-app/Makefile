@@ -29,6 +29,14 @@ migrate-down:
 up:
 	docker compose up -d pg
 
+migrate-create NAME ?= new_migration
+migrate-create:
+	$(GOOSE) create $(NAME) sql
+
+run: up migrate-up
+	go run ./cmd/api
+
+
 down:
 	docker compose down
 
