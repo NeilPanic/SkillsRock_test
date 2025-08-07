@@ -14,6 +14,8 @@
 DATABASE_DSN=postgres://auth_user:auth_password@localhost:5432/auth_db?sslmode=disable
 PORT=8080
 
+**Примечание: лимит/оффсет в целях демонстрации, в проде я бы использовал другие подходы, вроде key-set пагинации. 
+
 ## 1 · PostgreSQL
 
 ```bash
